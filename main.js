@@ -22,13 +22,13 @@ window.addEventListener("keydown", (event) => { //função que vai dar vida para
     const key  = event.key; //está definindo que a constante key tem uma propriedade de leitura e retornará
     //o valor da tecla pressionada pelo usuário
 
-    const keyPressedAvaiable =  keysAvaiable.some((currentKey) => { //essa função diz que se a tecla pressionada não for uma das esperadas
-        //será retornado a "chave", ou seja, possição atual que está definida no array "KeysAvaiable"
-        return currentKey === key;//logo, a chave atual será a chave que já estava antes
+    const keyPressedAvaiable =  keysAvaiable.some((currentKey) => { //O .some verifica se existe algum 'true', ou seja, ela ira percurrer o array keysAvaiable
+        //e verificar se a constante KeyPressedAvaiable existe, ou seja, é algum valor esperado
+        return currentKey === key;//logo, se for verdade (existir) o currentKey vai ser a Key atual (a q foi teclada)
     })
 
-    if(!keyPressedAvaiable) return; //aqui faz uma condição, ou seja, caso a tecla não seja invalida, ou seja
-    //seja uma tecla que realmente é esperada, alguma ações podem acontecer
+    if(!keyPressedAvaiable) return; //aqui faz uma condição, ou seja, caso a tecla seja invalida, ou seja
+    //uma tecla que não é esperada/não está no array keysAvaiable, não acontece nada 
 
     directions.forEach((direction) => { //ele percorre todos os valores que estão no array "directions"
         if(character.classList.contains(direction)) character.classList.remove(direction);//aqui o classList.contais checa se o elemento
@@ -42,7 +42,8 @@ window.addEventListener("keydown", (event) => { //função que vai dar vida para
         yPosition -= VELOCITY; //fazendo ele diminuir 10px (definido la em cima como VELOCITY) do eixo y e consequentemente fazendo ele subir
     }
 
-    if(key === "ArrowDown"){ //aqui faz uma condição, ou seja, caso a chave seja "ArrowDown" do array "keysAvaiable"
+    if(key === "ArrowDown" && yPosition < SCREEN_HEIGHT - 240){ //aqui faz uma condição, ou seja, caso a chave seja "ArrowDown" do array "keysAvaiable"
+        // e o yPosition tem que ser menos que o tamanho da tela menos 240 (altura do bonequinho)
         character.classList.add("turnDown"); //ele adiciona o caracter "turnDown" ao bonequinho
         yPosition += VELOCITY; //fazendo ele aumentar 10px (definido la em cima como VELOCITY) do eixo y e consequentemente fazendo ele descer
     }
@@ -53,7 +54,8 @@ window.addEventListener("keydown", (event) => { //função que vai dar vida para
         xPosition -= VELOCITY; //fazendo ele aumentar 10px (definido la em cima como VELOCITY) do eixo x e consequentemente fazendo ele ir para a esquerda
     }
 
-    if(key === "ArrowRight"){ //aqui faz uma condição, ou seja, caso a chave seja "ArrowRight" do array "keysAvaiable"
+    if(key === "ArrowRight" && xPosition < SCREEN_WIDTH - 80){ //aqui faz uma condição, ou seja, caso a chave seja "ArrowRight" do array "keysAvaiable"
+        // e o xPosition tem que ser menos que o tamanho da tela menos 80 (largura do bonequinho)
         character.classList.add("turnRight"); //ele adiciona o caracter "turnRight" ao bonequinho
         xPosition += VELOCITY; //fazendo ele aumentar 10px (definido la em cima como VELOCITY) do eixo x e consequentemente fazendo ele ir para a direita
     }
